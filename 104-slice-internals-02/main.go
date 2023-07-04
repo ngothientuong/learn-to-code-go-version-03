@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	a := []int{0, 1, 2, 3, 4, 5}
 	// b := a
-	b := make([]int, 6)
+	b := make([]int, len(a))
 	copy(b, a)
 
 	fmt.Println("a ", a)

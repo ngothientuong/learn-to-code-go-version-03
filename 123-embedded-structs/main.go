@@ -10,7 +10,7 @@ type person struct {
 
 type secretAgent struct {
 	person
-	ltk bool
+	ltk   bool
 	first string
 }
 
@@ -22,7 +22,7 @@ func main() {
 			age:   32,
 		},
 		first: "ETHAN HAWK",
-		ltk: true,
+		ltk:   true,
 	}
 
 	p2 := person{

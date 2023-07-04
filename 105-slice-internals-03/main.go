@@ -18,7 +18,7 @@ func main() {
 
 // uses the same underlying array
 // everything is pass by value in go
-// the value is being passed into thie func
+// the value is being passed into the func
 // and then assigned to x
 func medianOne(x []float64) float64 {
 	sort.Float64s(x)

@@ -10,4 +10,6 @@ func main() {
 
 	xxs := [][]string{jb, jm}
 	fmt.Println(xxs)
+	fmt.Println("-------")
+	fmt.Println(xxs[1][2])
 }
