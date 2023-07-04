@@ -5,14 +5,14 @@ import "fmt"
 func main() {
 	foo()
 
-	func(){
+	func() {
 		fmt.Println("Anonymous func ran")
-	}()
+	}() // the () at the end is the execution of the function
 
-	func(s string){
+	func(s string) {
 		fmt.Println("This is an anonymous func showing my name", s)
-	}("Todd")
-	
+	}("Todd") // the `("Todd")` here is argument that is referenced by `(s string)` above
+
 }
 
 func foo() {
