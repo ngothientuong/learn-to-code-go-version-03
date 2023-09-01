@@ -29,7 +29,7 @@
         - These methods can be called using variables of type *T.
         - it can call methods of the corresponding non-pointer type as w
 
-- Great example (be patient to when reading it)
+- Great example (**be patient** when reading it as it's **important** and **rewarding**)
 
 ```
 type T struct {
