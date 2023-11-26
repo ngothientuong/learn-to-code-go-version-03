@@ -4,7 +4,7 @@
 
 Joke The interface says to a struct: "Hey baby! If you have these methods, then you're my type"
 
-When a type T is a receiver of a function which certain identifier, then the type T is said to have a method of identifier
+When a type T is a receiver of a function with a certain identifier, then the type T is said to have a method of identifier
 
 Example:
 ```

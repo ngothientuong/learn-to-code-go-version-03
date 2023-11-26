@@ -13,7 +13,7 @@ func main() {
 	fmt.Println(p)
 	p = changeName(p, "Jen")
 	fmt.Println(p)
-	
+
 	changeNamePtr(&p, "JMo")
 	fmt.Println(p)
 }
