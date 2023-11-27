@@ -56,3 +56,13 @@ n = tPtr // This is fine, *T implements M1() and M2()
 
 - In this example, `T` implements `M1()` and `*T` implements both `M1()` and `M2()`. Therefore,
 `*T` satisfies interface `X`, but `T` does not. So we can assign `&T{}` to `n`, but not `T{}`.
+
+## READING DOCUMENTATIONS
+### PACKAGE PAGES
+
+- When reading package'S index page
+  - Under list of type, such as `type Decoder`: https://pkg.go.dev/encoding/json#pkg-index 
+  - The first function usually guide you how you can get a function of such type, e.g `*Decoder` 
+    - `func NewDecoder(r io.Reader) *Decoder`
+  - The rest of the functions in the same type are methods implemented by that type
+    - type `*Decoder` have medthods `Buffered()`, `Decode(v interface{})`, `More()`, `Token()`, `UseNumber()`
