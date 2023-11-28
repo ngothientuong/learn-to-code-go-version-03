@@ -20,6 +20,7 @@
 
 - `Reference Type` includes: interface, slices, channels, functions, pointers, maps
 - Remember the phase **a`I` `S`ẽ `C`ó `F`ần `P`hở `M`ập**
+- `Reference type` has pointer attached to it, hence the term `reference type`
 
 ## Method Sets
 - The idea of the method set is integral to how interfaces are implemented and used in Go.
@@ -66,3 +67,44 @@ n = tPtr // This is fine, *T implements M1() and M2()
     - `func NewDecoder(r io.Reader) *Decoder`
   - The rest of the functions in the same type are methods implemented by that type
     - type `*Decoder` have medthods `Buffered()`, `Decode(v interface{})`, `More()`, `Token()`, `UseNumber()`
+
+## MAP VS JSON OBJECT
+### MAP
+- Map is with format: `map[T1]T2`
+  - Example: 
+    ```
+    am := map[string]int{
+            "Todd":   42,
+            "Henry":  16,
+            "Padget": 14,
+        }
+    ```
+  - Adding members into map
+    `am["Lucas"] = 28`
+
+### JSON OBJECT
+- Data structure encoded in JSON format with byte of slice such as raw string literal, pointer.
+- To encode a Go map type it must be of the form map[string]T (where T is any Go type supported by the json package).
+  - Example 1: raw string is converted into byte slice
+    ```
+    var jsonBlob = []byte(`[
+	{"Name": "Platypus", "Order": "Monotremata"},
+	{"Name": "Quoll",    "Order": "Dasyuromorphia"}
+    ]`)
+    ```
+  - Example 2: a VALUE of a struct is converted into byte slice
+    ```
+    type ColorGroup struct {
+		ID     int
+		Name   string
+		Colors []string
+	}
+	group := ColorGroup{
+		ID:     1,
+		Name:   "Reds",
+		Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+	}
+	b, err := json.Marshal(group)  // b is byte slice
+    os.Stdout.Write(b)
+    // Output: {"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}
+    ```
