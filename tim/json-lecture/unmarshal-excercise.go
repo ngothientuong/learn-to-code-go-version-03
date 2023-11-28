@@ -24,6 +24,10 @@ func main() {
 	fmt.Printf("%+v", persons)
 	fmt.Println("\n======================\n")
 	for index, person := range persons {
-		fmt.Printf("Person %v is with \n First name: %s\n Last name: %s\nAge: %d\nWith saying: %s\n\n ", index, person.First, person.Last, person.Age, person.Sayings[0])
+		fmt.Printf("Person %v is with \n First name: %s\n Last name: %s\nAge: %d\nWith saying:\n ", index, person.First, person.Last, person.Age)
+		for _, saying := range person.Sayings {
+			fmt.Printf("\t%s\n", saying)
+		}
+		fmt.Println("\n")
 	}
 }
