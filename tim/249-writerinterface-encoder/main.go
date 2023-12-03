@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -52,10 +53,19 @@ func main() {
 	fmt.Println(users)
 
 	// your code goes here
-	bs, err := json.Marshal(users)
+	// User bytes.Buffer to as space to write out the json string
+	b := new(bytes.Buffer)
+	err := json.NewEncoder(b).Encode(&users)
 	if err != nil {
-		fmt.Println("Error: ", err)
+		fmt.Println("We did something wrong and here is the error: ", err)
 	}
-	fmt.Println(string(bs))
-	os.Stdout.Write(bs)
+	fmt.Println("\n")
+	fmt.Printf("Here is byte buffer in json with type\n: %+v \t %T", b.String(), b)
+
+	// You can also write to os.Stdout instead of bytes.Buffer
+	fmt.Println("\n")
+	err = json.NewEncoder(os.Stdout).Encode(&users)
+	if err != nil {
+		fmt.Println("We did something wrong and here is the error: ", err)
+	}
 }

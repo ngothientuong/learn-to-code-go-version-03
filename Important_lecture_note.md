@@ -1,12 +1,3 @@
-# Learn To Code Google's Go (golang) Programming Language
-
-- This code repository is used to **learn the Go programming language**. 
-- This is the code for Todd McLeod's "Learn To Code Go" course. 
-- There are video lectures associated with this codebase
-- **You can take the course at [mcleods.com](https://www.mcleods.com)**
-  
-🌞🌴😃
-
 # Important Note from Tim
 
 ## Pointer
@@ -108,3 +99,11 @@ n = tPtr // This is fine, *T implements M1() and M2()
     os.Stdout.Write(b)
     // Output: {"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}
     ```
+
+## ENCODE & DECODE WITH WRITER INTERFACE
+### TECHNIQUE TO CONVERT ANY GOLANG DATA TO JSON OBJECT
+- Great example: https://medium.com/what-i-talk-about-when-i-talk-about-technology/go-code-snippet-json-encoder-and-json-decoder-818f81864614
+- Example:
+  """
+
+  """
