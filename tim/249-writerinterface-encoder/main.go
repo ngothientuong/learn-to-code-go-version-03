@@ -68,4 +68,11 @@ func main() {
 	if err != nil {
 		fmt.Println("We did something wrong and here is the error: ", err)
 	}
+
+	// Example of initialize a type vs producing a pointer to its type
+	// Both cases, you can use the method belong to the type for the variables produced
+	var c bytes.Buffer
+	fmt.Printf("\nThis initializes a new bytes.Buffer: var c bytes.Buffer \n%v\n", c)
+	d := bytes.NewBufferString(`my string`)
+	fmt.Printf("This produces a new bytes.Buffer: d := bytes.NewBufferString(`my string`)\n %s", d)
 }

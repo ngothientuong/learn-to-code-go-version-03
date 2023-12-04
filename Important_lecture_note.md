@@ -51,13 +51,25 @@ n = tPtr // This is fine, *T implements M1() and M2()
 
 ## READING DOCUMENTATIONS
 ### PACKAGE PAGES
-
-- When reading package'S index page
+- **Important**: You can either `initialize a type` or use a `function to produce a type` as describe below
+  - This initializes a new bytes.Buffer
+    ```
+    var c bytes.Buffer
+    ```
+  - This produces a new bytes.Buffer using a function: d := bytes.NewBufferString(`my string`)
+    ```
+    d := bytes.NewBufferString(`my string`)
+    ```
+  
+- When reading package's index page:
   - Under list of type, such as `type Decoder`: https://pkg.go.dev/encoding/json#pkg-index 
-  - The first function usually guide you how you can get a function of such type, e.g `*Decoder` 
+  - The first function usually guide you how you can get a function to produce such type (or most often `pointer of its type`), e.g `*Decoder`
+  - `*T` can be used as `T`
     - `func NewDecoder(r io.Reader) *Decoder`
   - The rest of the functions in the same type are methods implemented by that type
     - type `*Decoder` have medthods `Buffered()`, `Decode(v interface{})`, `More()`, `Token()`, `UseNumber()`
+
+  
 
 ## MAP VS JSON OBJECT
 ### MAP
@@ -105,5 +117,65 @@ n = tPtr // This is fine, *T implements M1() and M2()
 - Great example: https://medium.com/what-i-talk-about-when-i-talk-about-technology/go-code-snippet-json-encoder-and-json-decoder-818f81864614
 - Example:
   """
+  package main
 
+  import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "os"
+  )
+
+  type user struct {
+    First   string
+    Last    string
+    Age     int
+    Sayings []string
+  }
+
+  func main() {
+    u1 := user{
+      First: "James",
+      Last:  "Bond",
+      Age:   32,
+      Sayings: []string{
+        "Shaken, not stirred",
+        "Youth is no guarantee of innovation",
+        "In his majesty's royal service",
+      },
+    }
+
+    u2 := user{
+      First: "Miss",
+      Last:  "Moneypenny",
+      Age:   27,
+      Sayings: []string{
+        "James, it is soo good to see you",
+        "Would you like me to take care of that for you, James?",
+        "I would really prefer to be a secret agent myself.",
+      },
+    }
+
+    users := []user{u1, u2}
+
+    fmt.Println(users)
+
+    // your code goes here
+    // User bytes.Buffer to as space to write out the json string
+    b := new(bytes.Buffer)
+    err := json.NewEncoder(b).Encode(&users)
+    if err != nil {
+      fmt.Println("We did something wrong and here is the error: ", err)
+    }
+    fmt.Println("\n")
+    fmt.Printf("Here is byte buffer in json with type\n: %+v \t %T", b.String(), b)
+  }
   """
+- Summary:
+  - `json.NewEncoder(new(bytes.Buffer))`: produces `*Encoder` (pointer to an Encoder)
+  -  `json.NewEncoder(new(bytes.Buffer)).Encode(users)` encode `users` data into `new(bytes.Buffer)`
+- Thought process:
+  - Need to **encode** the data `[]user` (or `users`, `&users`), you can use function `func (enc *Encoder) Encode(v any) error` from `json` package where `v any` can be any Golang data including `[]user` (or `users`, `&users`)
+  - Need to genrate the pointer to an Encoder (`*Encoder`) via function `func NewEncoder(w io.Writer) *Encoder`
+  - Need `io.Writer` interface to as place holder or as receiver in the function `func NewEncoder(w io.Writer) *Encoder`
+  - Any types that has method `Write()` is a type of the interface `io.Writer`, including `*File`, `bytes.Buffer`, `os.Stdout` as `os.Stdout` is a `File.NewFile` function producing pointer to a file (`*File`)
