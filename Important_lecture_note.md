@@ -179,3 +179,39 @@ n = tPtr // This is fine, *T implements M1() and M2()
   - Need to genrate the pointer to an Encoder (`*Encoder`) via function `func NewEncoder(w io.Writer) *Encoder`
   - Need `io.Writer` interface to as place holder or as receiver in the function `func NewEncoder(w io.Writer) *Encoder`
   - Any types that has method `Write()` is a type of the interface `io.Writer`, including `*File`, `bytes.Buffer`, `os.Stdout` as `os.Stdout` is a `File.NewFile` function producing pointer to a file (`*File`)
+
+
+## GOBUILD, GOINSTALL, GOOS
+```
+package main
+
+import (
+	"fmt"
+	"runtime"
+)
+
+func main() {
+	fmt.Println(runtime.GOARCH, runtime.GOOS)
+}
+```
+- `Go build` command
+  - cd <folder>
+  - go build
+  - You'll see a package with the same name as <folder>
+
+- `Go install` command
+  - cd <folder>
+  - go install
+  - the package is installed in the bin folder ~/go/bin/. Need to configure $PATH to call reference ~/go/bin
+
+## Manage, upgrade dependencies
+- Reference: https://go.dev/doc/modules/managing-dependencies
+
+## CHANNELS
+- A Goroutine can send a value to the channel and another Goroutine can pick up. This has to be done by 2 separate Goroutines.
+- A value can be sent to a BUFFERED channel by main goroutine and the main goroutine can also receive from the channel later
+  
+- Birectional Channel:  `c := make(chan int)`
+- Directional Channel, read from left to right:
+  - `cr := make(<-chan int)` // receive
+  - `cs := make(chan<- int)` // send
