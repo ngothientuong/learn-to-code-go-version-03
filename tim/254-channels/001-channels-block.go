@@ -7,6 +7,7 @@ import "fmt"
 // Instead, you MUST either:
 // 1. Create a buffer channel `c := make(chan int, n)` so you can then pull the value from the channel later
 // 2. Pass the value in the channel INSIDE the goroutine so it can run by itself, then have the MAIN process pull the value from that go routine. Think of baton passing in a team race
+//	  Channel Block: By using the MAIN process, we're BLOCKING the code until the main process is able to pull value from the channel that has value sent by the other GoRoutine
 
 func main() {
 	// Create a channel

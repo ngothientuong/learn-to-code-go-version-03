@@ -116,7 +116,7 @@ n = tPtr // This is fine, *T implements M1() and M2()
 ### TECHNIQUE TO CONVERT ANY GOLANG DATA TO JSON OBJECT
 - Great example: https://medium.com/what-i-talk-about-when-i-talk-about-technology/go-code-snippet-json-encoder-and-json-decoder-818f81864614
 - Example:
-  """
+  ```
   package main
 
   import (
@@ -170,7 +170,7 @@ n = tPtr // This is fine, *T implements M1() and M2()
     fmt.Println("\n")
     fmt.Printf("Here is byte buffer in json with type\n: %+v \t %T", b.String(), b)
   }
-  """
+  ```
 - Summary:
   - `json.NewEncoder(new(bytes.Buffer))`: produces `*Encoder` (pointer to an Encoder)
   -  `json.NewEncoder(new(bytes.Buffer)).Encode(users)` encode `users` data into `new(bytes.Buffer)`
@@ -209,9 +209,32 @@ func main() {
 
 ## CHANNELS
 - A Goroutine can send a value to the channel and another Goroutine can pick up. This has to be done by 2 separate Goroutines.
-- A value can be sent to a BUFFERED channel by main goroutine and the main goroutine can also receive from the channel later
-  
+  - **Channel Block**: We need to `block` the MAIN GoRoutine until the value is completely sent to the channel by the other Goroutine AND is successfully received by the Main Goroutine
+- A value can be sent to a `BUFFERED` channel by main goroutine and the main goroutine can also receive from the channel later
+
+### Channels - Directional Channels
 - Birectional Channel:  `c := make(chan int)`
 - Directional Channel, read from left to right:
   - `cr := make(<-chan int)` // receive
-  - `cs := make(chan<- int)` // send
+  - `cs := make(chan<- int)` // send  - On this channel, we're sending an int
+
+### Channels - Range over a receive channel
+- `Range` clause: We can range over the receive channel to pull values off from the channel `UNTIL THE CHANNEL IS CLOSED`
+  - **Important**: That means in the `send` channel, we must have a close statement, e.g. `close(c)`. This means this also block in the MAIN Goroutine until the receive operation completes!
+### Channels - Select Statement
+- `Select` statement: We can use `select` statement in tandem with infinite loop to pull values from multiple channel at the same time, whichever value is ready first will be pulled. If pulled a value from a quit channel, then exit the infinite loop -> need `NOT` to close the channel
+
+### Channels - Fanin & Fanout
+- `Fanin`: is a concept of pulling values from multiple Goroutines of receive channels and sending those values into 1 single receive channel.
+  - Tood Code example: https://go.dev/play/p/_CyyXQBCHe
+  - Rob Pike’s code example: https://go.dev/play/p/buy30qw5MM
+- `Fanout`: taking a chunk of work, send to multiple Goroutines to run in parallel, e.g. need to encode 1000 videos -> create 1000 Goroutines each encode a video.
+  - Example 1: https://go.dev/play/p/iU7Oee2nm7
+  - Example 2 - throttle to just 10 Goroutines: https://go.dev/play/p/RzR3Kjrx7q
+
+### Channels - `Context` - Advance topic
+- `Context`: Often you have a process that spawn other Goroutines. Sometimes you shutdown the process, you want the Goroutines spawned by the process to be canceled so no leaked resources happen. `context` helps you achieve that
+  - Further read:
+    - https://go.dev/blog/context
+    - https://medium.com/@matryer/context-has-arrived-per-request-state-in-go-1-7-4d095be83bd8
+    - https://peter.bourgon.org/blog/2016/07/11/context.html
