@@ -1,5 +1,8 @@
 # Important Note from Tim
 
+## TODO
+- Learn about http.Handler, http.ResponseWriter, *http.Request, http.HandleFunc
+
 ## Pointer
 
 - `*int`: type pointer to an int
@@ -238,3 +241,19 @@ func main() {
     - https://go.dev/blog/context
     - https://medium.com/@matryer/context-has-arrived-per-request-state-in-go-1-7-4d095be83bd8
     - https://peter.bourgon.org/blog/2016/07/11/context.html
+- For example, you can spawn a Goroutine has cxt.Done() so you can cancel the Goroutine from the main thread! 
+```
+go func() {
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			default:
+        // Do something
+        // Send output or error checking into a channel c
+        // In the main thread, pull output from channel c and call cancel() in the main thread to cancel this Goroutine IF you spot error!!!!
+			}
+		}
+	}()
+```
+- You can spawn MULTIPLE of the above Goroutines and send output in the the same channel. A single cancel() will cancel all of those GoRoutines!
