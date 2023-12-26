@@ -2,6 +2,8 @@ github.com/GoesToEleven/dog v0.0.0-20230428023317-90bef1c76cb9 h1:WtQjqEAV0EwbFV
 github.com/GoesToEleven/dog v0.0.0-20230428023317-90bef1c76cb9/go.mod h1:bSJZIYrINAWfFsUPONiX6V8GGsCFquPtn5yE6DFvIkE=
 github.com/GoesToEleven/puppy v1.3.0 h1:6kvL9k6x8STNArAn3VVdQAye+5AOM3SbxV0uPdq5xn0=
 github.com/GoesToEleven/puppy v1.3.0/go.mod h1:WobEgPdFB6u5c9xLvtp3KOhVIdHaYYpH6pZVOcLq0+w=
+github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
+github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
 golang.org/x/crypto v0.16.0 h1:mMMrFzRSCF0GvB7Ne27XVtVAaXLrPmgPC7/v0tkwHaY=
 golang.org/x/crypto v0.16.0/go.mod h1:gCAAfMLgwOJRpTjQ2zCCt2OcSfYMTeZVSRtQlPC7Nq4=
 golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 h1:m64FZMko/V45gv0bNmrNYoDEq8U5YUhetc9cBWKS1TQ=

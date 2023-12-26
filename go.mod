@@ -10,4 +10,7 @@ require (
 	golang.org/x/sync v0.5.0
 )
 
-require github.com/GoesToEleven/dog v0.0.0-20230428023317-90bef1c76cb9 // indirect
+require (
+	github.com/GoesToEleven/dog v0.0.0-20230428023317-90bef1c76cb9 // indirect
+	github.com/KyleBanks/depth v1.2.1 // indirect
+)

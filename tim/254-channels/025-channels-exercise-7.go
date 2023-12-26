@@ -1,4 +1,3 @@
-// STILL WORKING ON THIS - INCOMPLETE!!!!!
 package main
 
 import (

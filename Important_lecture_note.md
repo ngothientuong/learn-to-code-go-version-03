@@ -257,3 +257,51 @@ go func() {
 	}()
 ```
 - You can spawn MULTIPLE of the above Goroutines and send output in the the same channel. A single cancel() will cancel all of those GoRoutines!
+
+# Exported Functions - Struct fields - Struct
+- The first character is capitalized if you want to export the functions, Struct Field or Struct
+
+# ERROR HANDLING
+- Code sample: https://github.com/GoesToEleven/go-programming/tree/master/code_samples/006-error-handling
+- A `error interface` has type Error(). Type `errorString` that contains method `Error()` whichs returns a `string` => Type `errorString` implements the `error interface`
+- `errors.New(string)` produces a type `errorString` which implement the `error interface`
+- Any type that has method `Error()` implements type `error interface`
+
+- From package built-in/errors https://pkg.go.dev/builtin#error:
+  ```
+    type error interface {
+      Error() string
+    }
+  ```
+- From source code of `errors.New` function
+  ```
+    package errors
+
+    // New returns an error that formats as the given text.
+    // Each call to New returns a distinct error value even if the text is identical.
+    func New(text string) error {
+      return &errorString{text}
+    }
+
+    // errorString is a trivial implementation of error.
+    type errorString struct {
+      s string
+    }
+
+    func (e *errorString) Error() string {
+      return e.s
+    }
+  ```
+## Error hanlding - Printing and Logging
+- Similarly to logger in python, the below are recommended to be used which include timestamp:
+  - log.Println()
+  - log.Fatalln()
+    - os.Exit()
+  - log.Panicln()
+    - deferred functions run
+    - can use “recover”
+
+- Other options you can use but less recommended
+  - panic()
+  - fmt.Println()
+
