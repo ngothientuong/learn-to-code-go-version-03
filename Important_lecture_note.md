@@ -305,3 +305,71 @@ go func() {
   - panic()
   - fmt.Println()
 
+# WRITING DOC
+## `go doc` cmd line - prefer documentation page
+  - go help doc
+```
+    go doc <pkg>
+    go doc <sym>[.<methodOrField>]
+    go doc [<pkg>.]<sym>[.<methodOrField>]
+    go doc [<pkg>.][<sym>.]<methodOrField>
+```
+
+  - Example:
+    ```
+            go doc json.Decoder.Decode
+            go doc json.decoder.decode
+            go doc json.decode
+            cd go/src/encoding/json; go doc decode
+    ```
+
+## `godoc` - one word
+- Install:  `sudo apt install golang-golang-x-tools`
+- Run local http server to access the documentation
+```
+godoc -http=:8080
+```
+- Open web browser and access `http://localhost:8080`
+
+## `pkg.go.dev` - HOW TO SHARE YOU CODE
+- TODO: Find out how to share your code to `pkg.go.dev`
+
+## Writing Documentation - convention
+- Put comment right above package name, function (or identifier)
+- Always start with the name of the package, function (or identifier) in the comment
+- If the documentation for packge is lengthy, create a doc.go file in the package folder. See `fmt` package, scroll down to the bottom to see the doc.go file for example
+
+# WRITING TESTS
+- Tests must: 
+  - be in a file that ends with “_test.go”
+  - put the file in the same package as the one being tested
+  - be in a func with a signature “func TestXxx(*testing.`T`)”
+- `*testing.T`: pointer of type T in package `testing`: https://pkg.go.dev/testing#T  
+  - Have methods Error(), Errorf(), Parallel(), ...
+- Similarly, there are `*testing.B`, `*testing.F` which has a set of their own methods!
+
+## Writing test - Example - 256-writing-test:03-writing-test-example
+- `Example` are tests: https://pkg.go.dev/testing#hdr-Examples
+- Write `Example` in test file
+
+## Writing test - Golint, go vet, gofmt
+- `golint``: reports poor coding style
+- `go vet`: reports suspicious constructs
+- `gofmt`: formats go code
+
+## Benchmark - 256-writing-test:04-writing-test-benchmark
+- Measure how fast your code runs.
+- Write benchmark in test file
+- `go test -bench . ./...` or `go test -bench <functionName> ./...`
+  - `./...` means from this directory and all sub-directories
+- `go help testflag`
+
+## Coverage
+- `go test -cover`
+- `go test -coverprofile c.out`
+- show in browser: `go tool cover -html=c.out`
+- `go tool cover -h`
+- `go test -cover -bench . ./...` : cover and bench mark at the same time
+
+# Misc
+- String is a slice of byte
